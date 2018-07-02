@@ -4,7 +4,7 @@ add_translation ( "edit_module", "Edit Module" );
 add_translation ( "cancel", "Cancel" );
 add_translation ( "source", "Source" );
 add_translation ( "embeddable", "Embeddable" );
-add_translation ( "shy", "Shy" );
+add_translation ( "shy", "Hide Module" );
 add_translation ( "main_class", "Main Class" );
 add_translation ( "create_post_install_script", "Create post-install Script" );
 add_translation ( "hooks", "Hooks" );
