@@ -30,7 +30,7 @@ class ModStarter extends Controller {
 		$model->embeddable = (isset ( $metadata ["embed"] ) and $metadata ["embed"]);
 		$model->shy = (isset ( $metadata ["shy"] ) and $metadata ["shy"]);
 		$model->main_class = $metadata ["main_class"];
-		$model->create_post_install_script = file_exists ( Path::resolve ( "ULICMS_ROOT/post-install.php" ) );
+		$model->create_post_install_script = file_exists ( Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" ) );
 		$model->hooks = is_array ( $metadata ["hooks"] ) ? $metadata ["hooks"] : array ();
 		$model->edit = true;
 		ViewBag::set ( "model", $model );
@@ -47,7 +47,7 @@ class ModStarter extends Controller {
 		$source = Request::getVar ( "source" );
 		$embeddable = Request::hasVar ( "embeddable" );
 		$shy = Request::hasVar ( "shy" );
-		$create_post_install_script = (Request::hasVar ( "create_post_install_script" ) and ! file_exists ( Path::resolve ( "ULICMS_ROOT/post-install.php" ) ));
+		$create_post_install_script = (Request::hasVar ( "create_post_install_script" ) and ! file_exists ( Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" ) ));
 		
 		$moduleFolderPath = getModulePath ( $module_folder, false );
 		if (! file_exists ( $moduleFolderPath )) {
@@ -93,7 +93,7 @@ class ModStarter extends Controller {
 		File::write ( $metadataFile, json_readable_encode ( $metadata, 0, true ) );
 		File::write ( ModuleHelper::buildRessourcePath ( $module_folder, ".modstarter" ), "" );
 		if ($create_post_install_script) {
-			$script = Path::resolve ( "ULICMS_ROOT/post-install.php" );
+			$script = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" );
 			File::write ( $script, "<?php\r\n" );
 		}
 		Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
@@ -182,7 +182,7 @@ class ModStarter extends Controller {
 		File::write ( $metadataFile, json_readable_encode ( $metadata, 0, true ) );
 		File::write ( ModuleHelper::buildRessourcePath ( $module_folder, ".modstarter" ), "" );
 		if ($create_post_install_script) {
-			$script = Path::resolve ( "ULICMS_ROOT/post-install.php" );
+			$script = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" );
 			File::write ( $script, "<?php\r\n" );
 		}
 		Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
