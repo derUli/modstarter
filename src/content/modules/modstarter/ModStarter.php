@@ -124,6 +124,9 @@ class ModStarter extends Controller {
 				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "lang" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "js" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "css" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql/up" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql/down" ) 
