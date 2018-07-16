@@ -7,5 +7,5 @@ add_translation("embeddable", "Einbindbar");
 add_translation("shy", "Modul verstecken");
 add_translation("main_class", "Hauptklasse");
 add_translation("create_post_install_script", "post-install Script erstellen");
-add_translation("hooks", "Einhängepunkte");
+add_translation("hooks", "Ereignisse");
 add_translation("module_folder", "Modulordner");
