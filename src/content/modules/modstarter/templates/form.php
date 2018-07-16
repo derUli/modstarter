@@ -24,7 +24,7 @@ $headline = $model->edit ? "edit_module" : "create_module";
 </p>
 <p>
 	<strong><?php translate("module_folder")?></strong> <br /> <input
-		type="text" name="module_folder" maxlength="20"
+		type="text" name="module_folder" maxlength="32"
 		value="<?php esc($model->module_folder);?>"
 		<?php if($model->edit){echo "readonly";}?> required>
 </p>
@@ -38,7 +38,7 @@ $headline = $model->edit ? "edit_module" : "create_module";
 </p>
 <p>
 	<strong><?php translate("version")?></strong> <br /> <input type="text"
-		name="version" maxlength="20" value="<?php esc($model->version);?>"
+		name="version" maxlength="10" value="<?php esc($model->version);?>"
 		required>
 </p>
 <p>
