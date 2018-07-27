@@ -7,10 +7,9 @@ $sources = array (
 		"core" 
 );
 // TODO: List of all hooks
-$hooks = array (
-		"uninstall",
-		"clearCache" 
-);
+$hooks = StringHelper::linesFromFile ( ModuleHelper::buildRessourcePath ( ModStarter::MODULE_NAME, "list-of-hooks.txt" ) );
+sort ( $hooks );
+
 $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterProjectViewModel ();
 
 $action = $model->edit ? "update" : "create";
@@ -39,9 +38,9 @@ $languages = Language::getAllLanguages ();
 		<?php }?></select>
 </p>
 <p>
-	<strong><?php translate("version")?>*</strong> <br /> <input type="text"
-		name="version" maxlength="10" value="<?php esc($model->version);?>"
-		required>
+	<strong><?php translate("version")?>*</strong> <br /> <input
+		type="text" name="version" maxlength="10"
+		value="<?php esc($model->version);?>" required>
 </p>
 <p>
 	<input type="checkbox" name="embeddable" id="embeddable" value="1"
@@ -73,7 +72,7 @@ $languages = Language::getAllLanguages ();
 
 foreach ( $hooks as $hook ) {
 	?>
-	<option value="<?php esc($hook);?>"
+	<option value="<?php esc(ModuleHelper::underscoreToCamel($hook));?>"
 			<?php if(in_array($hook, $model->hooks))?>><?php esc($hook);?></option>
 <?php }?>
 </select>
