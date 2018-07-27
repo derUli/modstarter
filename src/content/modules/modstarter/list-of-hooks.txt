@@ -120,3 +120,4 @@ before_session_start
 after_session_start
 after_jquery_include
 head
+backend_footer
