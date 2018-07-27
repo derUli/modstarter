@@ -15,6 +15,8 @@ $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterPro
 
 $action = $model->edit ? "update" : "create";
 $headline = $model->edit ? "edit_module" : "create_module";
+
+$languages = Language::getAllLanguages ();
 ?>
 <h1><?php translate($headline);?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", $action);?>
@@ -73,6 +75,15 @@ foreach ( $hooks as $hook ) {
 	?>
 	<option value="<?php esc($hook);?>"
 			<?php if(in_array($hook, $model->hooks))?>><?php esc($hook);?></option>
+<?php }?>
+</select>
+</p>
+<p>
+<strong><?php translate("languages");?></strong><br/>
+<select name="languages[]" multiple>
+<?php foreach($languages as $language){
+?>
+<option value="<?php esc($language->getLanguageCode());?>"><?php esc($language->getName());?></option>
 <?php }?>
 </select>
 </p>

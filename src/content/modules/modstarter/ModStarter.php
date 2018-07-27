@@ -15,7 +15,6 @@ class ModStarter extends Controller {
 		$name = Request::getVar ( "name" );
 		$model = new ModStarterProjectViewModel ();
 		
-		ViewBag::set ( "model", $model );
 		if (! $name) {
 			Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 		}
@@ -33,6 +32,8 @@ class ModStarter extends Controller {
 		$model->create_post_install_script = file_exists ( Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" ) );
 		$model->hooks = is_array ( $metadata ["hooks"] ) ? $metadata ["hooks"] : array ();
 		$model->edit = true;
+		$model->languages = array();
+	
 		ViewBag::set ( "model", $model );
 	}
 	public function updatePost() {
