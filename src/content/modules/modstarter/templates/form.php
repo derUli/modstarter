@@ -25,7 +25,7 @@ $languages = Language::getAllLanguages ();
 		class="btn btn-default"><?php translate("cancel");?></a>
 </p>
 <p>
-	<strong><?php translate("module_folder")?></strong> <br /> <input
+	<strong><?php translate("module_folder")?>*</strong> <br /> <input
 		type="text" name="module_folder" maxlength="32"
 		value="<?php esc($model->module_folder);?>"
 		<?php if($model->edit){echo "readonly";}?> required>
@@ -39,7 +39,7 @@ $languages = Language::getAllLanguages ();
 		<?php }?></select>
 </p>
 <p>
-	<strong><?php translate("version")?></strong> <br /> <input type="text"
+	<strong><?php translate("version")?>*</strong> <br /> <input type="text"
 		name="version" maxlength="10" value="<?php esc($model->version);?>"
 		required>
 </p>
@@ -53,7 +53,7 @@ $languages = Language::getAllLanguages ();
 		<?php if($model->shy){ echo "checked";};?>> <label for="shy"> <?php translate("shy");?></label>
 </p>
 <p>
-	<strong><?php translate("main_class")?></strong><br /> <input
+	<strong><?php translate("main_class")?>*</strong><br /> <input
 		type="text" name="main_class"
 		<?php if($model->edit) { echo "readonly";}?>
 		value="<?php esc($model->main_class);?>" required>
