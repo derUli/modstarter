@@ -80,7 +80,7 @@ foreach ( $hooks as $hook ) {
 </p>
 <p>
 <strong><?php translate("languages");?></strong><br/>
-<select name="languages[]" multiple>
+<select name="languages[]" multiple <?php if($model->edit) echo "disabled";?>>
 <?php foreach($languages as $language){
 ?>
 <option value="<?php esc($language->getLanguageCode());?>"><?php esc($language->getName());?></option>

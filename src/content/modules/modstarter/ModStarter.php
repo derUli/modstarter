@@ -157,6 +157,16 @@ class ModStarter extends Controller {
 		}
 		$metadata ["embed"] = $embeddable;
 		$metadata ["shy"] = $shy;
+
+		$languages = Request::getVar("languages");
+		if(is_array($languages)){
+			foreach($languages as $language){
+				$langFile = ModuleHelper::buildRessourcePath ( $module_folder, "lang/{$language}.php" );
+				if(!is_file($langFile)){
+					file_put_contents($langFile, "<?php\r\n");
+				}
+			}
+		}
 		
 		$manager = new ModStarterProjectManager ();
 		
