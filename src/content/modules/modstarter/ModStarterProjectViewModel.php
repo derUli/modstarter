@@ -9,4 +9,5 @@ class ModStarterProjectViewModel {
 	public $create_post_install_script = false;
 	public $hooks = array ();
 	public $edit = false;
+	public $languages = array();
 }

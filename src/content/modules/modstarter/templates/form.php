@@ -7,14 +7,15 @@ $sources = array (
 		"core" 
 );
 // TODO: List of all hooks
-$hooks = array (
-		"uninstall",
-		"clearCache" 
-);
+$hooks = StringHelper::linesFromFile ( ModuleHelper::buildRessourcePath ( ModStarter::MODULE_NAME, "list-of-hooks.txt" ) );
+sort ( $hooks );
+
 $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterProjectViewModel ();
 
 $action = $model->edit ? "update" : "create";
 $headline = $model->edit ? "edit_module" : "create_module";
+
+$languages = Language::getAllLanguages ();
 ?>
 <h1><?php translate($headline);?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", $action);?>
@@ -23,7 +24,7 @@ $headline = $model->edit ? "edit_module" : "create_module";
 		class="btn btn-default"><?php translate("cancel");?></a>
 </p>
 <p>
-	<strong><?php translate("module_folder")?></strong> <br /> <input
+	<strong><?php translate("module_folder")?>*</strong> <br /> <input
 		type="text" name="module_folder" maxlength="32"
 		value="<?php esc($model->module_folder);?>"
 		<?php if($model->edit){echo "readonly";}?> required>
@@ -37,9 +38,9 @@ $headline = $model->edit ? "edit_module" : "create_module";
 		<?php }?></select>
 </p>
 <p>
-	<strong><?php translate("version")?></strong> <br /> <input type="text"
-		name="version" maxlength="10" value="<?php esc($model->version);?>"
-		required>
+	<strong><?php translate("version")?>*</strong> <br /> <input
+		type="text" name="version" maxlength="10"
+		value="<?php esc($model->version);?>" required>
 </p>
 <p>
 	<input type="checkbox" name="embeddable" id="embeddable" value="1"
@@ -51,7 +52,7 @@ $headline = $model->edit ? "edit_module" : "create_module";
 		<?php if($model->shy){ echo "checked";};?>> <label for="shy"> <?php translate("shy");?></label>
 </p>
 <p>
-	<strong><?php translate("main_class")?></strong><br /> <input
+	<strong><?php translate("main_class")?>*</strong><br /> <input
 		type="text" name="main_class"
 		<?php if($model->edit) { echo "readonly";}?>
 		value="<?php esc($model->main_class);?>" required>
@@ -71,8 +72,20 @@ $headline = $model->edit ? "edit_module" : "create_module";
 
 foreach ( $hooks as $hook ) {
 	?>
-	<option value="<?php esc($hook);?>"
+	<option value="<?php esc(ModuleHelper::underscoreToCamel($hook));?>"
 			<?php if(in_array($hook, $model->hooks))?>><?php esc($hook);?></option>
+<?php }?>
+</select>
+</p>
+<p>
+	<strong><?php translate("languages");?></strong><br /> <select
+		name="languages[]" multiple>
+<?php
+
+foreach ( $languages as $language ) {
+	?>
+<option value="<?php esc($language->getLanguageCode());?>"
+			<?php if(in_array($language->getLanguageCode(), $model->languages)) echo "selected";?>><?php esc($language->getName());?></option>
 <?php }?>
 </select>
 </p>

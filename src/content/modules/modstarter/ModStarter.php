@@ -15,7 +15,6 @@ class ModStarter extends Controller {
 		$name = Request::getVar ( "name" );
 		$model = new ModStarterProjectViewModel ();
 		
-		ViewBag::set ( "model", $model );
 		if (! $name) {
 			Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 		}
@@ -33,6 +32,14 @@ class ModStarter extends Controller {
 		$model->create_post_install_script = file_exists ( Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" ) );
 		$model->hooks = is_array ( $metadata ["hooks"] ) ? $metadata ["hooks"] : array ();
 		$model->edit = true;
+		$model->languages = array ();
+		foreach ( Language::getAllLanguages () as $language ) {
+			$langFile = ModuleHelper::buildRessourcePath ( $name, "lang/" . $language->getLanguageCode () . ".php" );
+			if (is_file ( $langFile )) {
+				$model->languages [] = $language->getLanguageCode ();
+			}
+		}
+		
 		ViewBag::set ( "model", $model );
 	}
 	public function updatePost() {
@@ -96,6 +103,18 @@ class ModStarter extends Controller {
 			$script = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/post-install.php" );
 			File::write ( $script, "<?php\r\n" );
 		}
+		$languages = Request::getVar ( "languages" );
+		
+		foreach ( Language::getAllLanguages () as $language ) {
+			$langFile = ModuleHelper::buildRessourcePath ( $module_folder, "lang/" . $language->getLanguageCode () . ".php" );
+			
+			if (in_array ( $language->getLanguageCode (), $languages ) and ! is_file ( $langFile )) {
+				file_put_contents ( $langFile, "<?php\r\n" );
+			} else if (! in_array ( $language->getLanguageCode (), $languages ) and is_file ( $langFile )) {
+				unlink ( $langFile );
+			}
+		}
+		
 		Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 	}
 	public function createPost() {
@@ -111,9 +130,16 @@ class ModStarter extends Controller {
 		$embeddable = Request::hasVar ( "embeddable" );
 		$shy = Request::hasVar ( "shy" );
 		$main_class = Request::getVar ( "main_class" );
+		
 		$create_post_install_script = Request::hasVar ( "create_post_install_script" );
 		$hooks = Request::hasVar ( "hooks" ) ? Request::getVar ( "hooks" ) : array ();
 		// Modul erstellen oder updaten, sofern es schon existiert und eine modstarter Datei hat
+		
+		if (class_exists ( $main_class )) {
+			ExceptionResult ( get_translation ( "the_class_x_already_exists", array (
+					"%class%" => _esc ( $main_class ) 
+			) ) );
+		}
 		
 		$moduleFolderPath = getModulePath ( $module_folder, false );
 		if (! file_exists ( $moduleFolderPath )) {
@@ -157,6 +183,16 @@ class ModStarter extends Controller {
 		$metadata ["embed"] = $embeddable;
 		$metadata ["shy"] = $shy;
 		
+		$languages = Request::getVar ( "languages" );
+		if (is_array ( $languages )) {
+			foreach ( $languages as $language ) {
+				$langFile = ModuleHelper::buildRessourcePath ( $module_folder, "lang/{$language}.php" );
+				if (! is_file ( $langFile )) {
+					file_put_contents ( $langFile, "<?php\r\n" );
+				}
+			}
+		}
+		
 		$manager = new ModStarterProjectManager ();
 		
 		if (StringHelper::isNotNullOrWhitespace ( $main_class )) {
@@ -166,7 +202,7 @@ class ModStarter extends Controller {
 			);
 			$hooksCode = "";
 			if ($embeddable) {
-				$hooksCode .= "public function render(){\r\n\t\treturn \"\";\r\n\t}\r\n";
+				$hooksCode .= "public function render() {\r\n\t\treturn \"\";\r\n\t}\r\n";
 			}
 			if (is_array ( $hooks )) {
 				foreach ( $hooks as $hook ) {
