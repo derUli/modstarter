@@ -21,7 +21,7 @@ $languages = Language::getAllLanguages ();
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", $action);?>
 <p>
 	<a href="<?php echo ModuleHelper::buildAdminURL("modstarter");?>"
-		class="btn btn-default"><?php translate("cancel");?></a>
+		class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate("cancel");?></a>
 </p>
 <p>
 	<strong><?php translate("module_folder")?>*</strong> <br /> <input
@@ -90,6 +90,6 @@ foreach ( $languages as $language ) {
 </select>
 </p>
 <p>
-	<button type="submit" class="btn btn-success"><?php translate("save")?></button>
+	<button type="submit" class="btn btn-success"><i class="far fa-save"></i> <?php translate("save")?></button>
 </p>
 </form>

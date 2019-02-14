@@ -4,7 +4,7 @@ $projects = $manager->getAllProjects ();
 ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("modstarter_new");?>"
-		class="btn btn-default"><?php translate("new");?></a>
+		class="btn btn-default"><i class="fas fa-plus"></i> <?php translate("new");?></a>
 </p>
 <table class="tablesorter">
 	<thead>
@@ -16,11 +16,10 @@ $projects = $manager->getAllProjects ();
 	<tbody>
 <?php foreach($projects as $project){?>
 <tr>
-			<td><?php esc($project);?></td>
-			<td class="text-center"><a
-				href="<?php echo ModuleHelper::buildMethodCallUrl("ModStarter", "edit", "name=".$project."&action=modstarter_edit");?>"><img
-					src="gfx/edit.png" alt="<?php translate("edit");?>"
-					title="<?php translate("edit");?>"></a></td>
+			<td><a
+				href="<?php echo ModuleHelper::buildMethodCallUrl("ModStarter", "edit", "name=".$project."&action=modstarter_edit");?>" title="<?php translate("edit");?>" class="btn btn-default"><?php esc($project);?></a></td>
+			<td class="text-right"><a
+				href="<?php echo ModuleHelper::buildMethodCallUrl("ModStarter", "edit", "name=".$project."&action=modstarter_edit");?>" title="<?php translate("edit");?>" class="btn btn-default"><i class="far fa-edit"></i></a></td>
 		</tr>
 <?php }?>
 </tbody>
