@@ -1,6 +1,6 @@
 <?php
 class [[MainClass]] extends Controller{
-	private $moduleName = "[[ModuleName]]";
+	const MODULE_NAME = "[[ModuleName]]";
 
 	[[Hooks]]
 }
