@@ -1,5 +1,5 @@
 <?php
-class ModStarter extends Controller {
+class ModStarter extends MainClass {
 	const MODULE_NAME = "modstarter";
 	const MODULE_TITLE = "Modstarter";
 	public function settings() {
