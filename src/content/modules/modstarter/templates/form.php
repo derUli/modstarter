@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Language;
+
 $sources = array (
 		"",
 		"pkgsrc",
@@ -6,7 +9,7 @@ $sources = array (
 		"local",
 		"core" 
 );
-// TODO: List of all hooks
+// TODO: Update list of all hooks
 $hooks = StringHelper::linesFromFile ( ModuleHelper::buildRessourcePath ( ModStarter::MODULE_NAME, "list-of-hooks.txt" ) );
 sort ( $hooks );
 

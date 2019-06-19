@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Utils\File;
+
 class ModStarterProjectManager {
 	const MODULE_NAME = "modstarter";
 	public function getAllProjects() {

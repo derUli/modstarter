@@ -1,4 +1,8 @@
 <?php
+
+use UliCMS\Models\Content\Language;
+use UliCMS\Utils\File;
+
 class ModStarter extends MainClass {
 	const MODULE_NAME = "modstarter";
 	const MODULE_TITLE = "Modstarter";
@@ -73,12 +77,6 @@ class ModStarter extends MainClass {
 			if (! file_exists ( $dir )) {
 				mkdir ( $dir );
 			}
-			/*
-			 * $keepFile = $dir . "/.keep";
-			 * if (! file_exists ( $keepFile )) {
-			 * File::write ( $keepFile, "" );
-			 * }
-			 */
 		}
 		
 		$metadataFile = ModuleHelper::buildRessourcePath ( $module_folder, "metadata.json" );
