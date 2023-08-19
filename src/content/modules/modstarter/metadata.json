@@ -1,6 +1,6 @@
 {
 	"source": "extend",
-	"version": "0.6",
+	"version": "0.8",
 	"custom_acl": [
 		"modstarter"
 	],

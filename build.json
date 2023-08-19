@@ -1,9 +1,9 @@
 {
 	"id": "modstarter",
-	"version": "0.6",
+	"version": "0.8",
 	"description": "ModStarter",
 	"categories": [
 		"development"
 	],
-	"compatible_from": "2019.3.1"
+	"compatible_from": "2023.4"
 }
